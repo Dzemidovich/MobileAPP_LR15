@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Книжный Мир | Беларусь</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* =============== Переменные =============== */
+    :root {
+      --primary-bg: #121212;
+      --card-bg: rgba(30, 30, 30, 0.7);
+      --accent: #4CAF50;
+      --text-light: #f0f0f0;
+      --text-gray: #b0b0b0;
+      --border-radius: 12px;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      --transition: all 0.3s ease;
+    }
+
+    /* =============== Базовые стили =============== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--primary-bg);
+      color: var(--text-light);
+      min-width: 320px;
+      line-height: 1.6;
+    }
+
+    .container {
+      background-color: var(--primary-bg);
+      min-height: 100vh;
+      padding-bottom: 70px;
+      transition: background-color 0.3s;
+    }
+
+    /* =============== Общие стили =============== */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .page-title {
+      text-align: center;
+      margin: 2rem 0 1.5rem;
+      font-size: 1.8rem;
+      color: var(--accent);
+      position: relative;
+    }
+
+    .page-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* =============== Шапка =============== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(30, 30, 30, 0.9);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .search-box {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .search-box input {
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 20px;
+      width: 200px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-light);
+      backdrop-filter: blur(5px);
+      transition: var(--transition);
+    }
+
+    .search-box input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .search-box button {
+      background: var(--accent);
+      border: none;
+      color: white;
+      width: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .search-box button:hover {
+      background: #3d8b40;
+    }
+
+    .desktop-nav {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .desktop-nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .desktop-nav a i {
+      margin-right: 0.5rem;
+    }
+
+    .desktop-nav a:hover {
+      color: var(--accent);
+      transform: scale(1.05);
+    }
+
+    .nav-active {
+      color: var(--accent) !important;
+    }
+
+    /* =============== Герой =============== */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(50, 50, 50, 0.9) 100%);
+      margin: 2rem 1rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      opacity: 0.9;
+    }
+
+    .cta-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .cta-btn:hover {
+      background: #3d8b40;
+      transform: translateY(-2px);
+    }
+
+    /* =============== Книги =============== */
+    .books {
+      padding: 0 1rem 2rem;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .book-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      backdrop-filter: blur(5px);
+    }
+
+    .book-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .book-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .book-card img:hover {
+      transform: scale(1.05);
+    }
+
+    .book-card .content {
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .book-card h3 {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    .book-card p {
+      color: var(--text-gray);
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .book-card .price {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .buy-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .buy-btn:hover {
+      background: #3d8b40;
+    }
+
+    /* =============== Слайдер =============== */
+    .slider-section {
+      padding: 2rem 1rem;
+    }
+
+    .slider-container {
+      overflow: hidden;
+      border-radius: var(--border-radius);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .slide-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1.5rem;
+      color: white;
+    }
+
+    .slide-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .slider-btn {
+      background: var(--accent);
+      border: none;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .slider-btn:hover {
+      background: #3d8b40;
+    }
+
+    .slider-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .slider-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--text-gray);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .slider-dot.active {
+      background: var(--accent);
+    }
+
+    /* =============== Корзина =============== */
+    .cart-items {
+      padding: 1rem;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-gray);
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-details h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-details p {
+      color: var(--text-gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .quantity-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .quantity-btn:hover {
+      background: var(--accent);
+    }
+
+    .quantity {
+      margin: 0 0.5rem;
+      font-weight: 600;
+    }
+
+    .remove-btn {
+      background: #f44336;
+      color: white;
+      border: none;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: var(--transition);
+    }
+
+    .remove-btn:hover {
+      background: #d32f2f;
+    }
+
+    .cart-summary {
+      padding: 1rem;
+      background: var(--card-bg);
+      margin: 1rem;
+      border-radius: var(--border-radius);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-total {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .checkout-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .checkout-btn:hover {
+      background: #3d8b40;
+    }
+
+    /* =============== Контакты =============== */
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card i {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .contact-card h3 {
+      margin-bottom: 1rem;
+    }
+
+    .contact-card p {
+      margin-bottom: 0.5rem;
+      color: var(--text-gray);
+    }
+
+    .contact-form {
+      padding: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-light);
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .submit-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background: #3d8b40;
+    }
+
+    /* =============== Скидки =============== */
+    .discount-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    .discount-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .discount-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .discount-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #f44336;
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      z-index: 1;
+    }
+
+    .discount-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .discount-card .content {
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .discount-card h3 {
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+      font-weight: 600;
+    }
+
+    .discount-card p {
+      color: var(--text-gray);
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .discount-card .price {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .discount-card s {
+      color: var(--text-gray);
+      font-size: 0.9rem;
+      margin-right: 0.5rem;
+    }
+
+    /* =============== Друзья =============== */
+    .friends-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+
+    .friend-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .friend-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .friend-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .friend-card h3 {
+      padding: 1rem 1rem 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .friend-card p {
+      padding: 0 1rem 1rem;
+      color: var(--text-gray);
+      font-size: 0.9rem;
+    }
+
+    /* =============== Авторизация =============== */
+    .auth-section {
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .auth-container {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .auth-tabs {
+      display: flex;
+    }
+
+    .auth-tab {
+      flex: 1;
+      text-align: center;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .auth-tab.active {
+      background: var(--accent);
+      font-weight: 600;
+    }
+
+    .auth-tab:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .auth-form {
+      padding: 2rem;
+      display: none;
+    }
+
+    .auth-form.active {
+      display: block;
+    }
+
+    /* =============== Подвал =============== */
+    .footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--text-gray);
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    /* =============== Мобильная навигация =============== */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(30, 30, 30, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 0.8rem 0;
+      display: flex;
+      justify-content: space-around;
+      z-index: 200;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-nav a {
+      font-size: 1.5rem;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--accent);
+    }
+
+    /* =============== Адаптивность =============== */
+    /* Для планшетов (768px - 1024px) */
+    @media screen and (max-width: 1024px) {
+      .book-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .friends-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .contact-info {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .discount-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .header {
+        padding: 1rem;
+      }
+
+      .header .search-box input {
+        width: 150px;
+      }
+    }
+
+    /* Для маленьких планшетов и больших мобильных устройств (480px - 767px) */
+    @media screen and (max-width: 767px) {
+      .container {
+        background-color: #1e1e1e;
+        padding-bottom: 80px;
+      }
+
+      .book-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .friends-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-info {
+        grid-template-columns: 1fr;
+      }
+      
+      .discount-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .desktop-nav {
+        display: none !important;
+      }
+
+      .mobile-nav {
+        display: flex;
+      }
+
+      .header {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .header .search-box {
+        order: 3;
+        width: 100%;
+      }
+
+      .header .search-box input {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .hero {
+        padding: 2rem 1rem;
+        margin: 1.5rem 0.5rem;
+      }
+
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .cart-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .cart-summary {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    /* Для мобильных устройств (до 480px) */
+    @media screen and (max-width: 480px) {
+      .book-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h2 {
+        font-size: 1.6rem;
+      }
+
+      .hero p {
+        font-size: 0.9rem;
+      }
+
+      .header h1 {
+        font-size: 1.4rem;
+      }
+      
+      .slider-controls {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>📚 Книжный Мир</h1>
+      <div class="search-box">
+        <input type="text" placeholder="Поиск по каталогу..." />
+        <button><i class="fas fa-search"></i></button>
+      </div>
+      <nav class="desktop-nav">
+        <a href="#" data-page="home" class="nav-active"><i class="fas fa-home"></i> Главная</a>
+        <a href="#" data-page="discounts"><i class="fas fa-tag"></i> Скидки</a>
+        <a href="#" data-page="friends"><i class="fas fa-users"></i> Друзья</a>
+        <a href="#" data-page="contacts"><i class="fas fa-phone"></i> Контакты</a>
+        <a href="#" data-page="auth"><i class="fas fa-user"></i> Войти</a>
+        <a href="#" data-page="cart"><i class="fas fa-shopping-cart"></i> Корзина (<span id="cart-count">0</span>)</a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <!-- Главная страница -->
+      <section id="home" class="page active">
+        <section class="hero">
+          <h2>Откройте мир книг</h2>
+          <p>Лучшие книги по выгодным ценам в Беларуси</p>
+          <button class="cta-btn">Каталог</button>
+        </section>
+        
+        <!-- Слайдер "Хиты недели" -->
+        <section class="slider-section">
+          <h2 class="page-title">Хиты недели</h2>
+          <div class="slider-container">
+            <div class="slider" id="hits-slider">
+              <div class="slide">
+                <img src="https://via.placeholder.com/800x400/333333/FFFFFF?text=1984" alt="1984">
+                <div class="slide-content">
+                  <h3>1984</h3>
+                  <p>Джордж Оруэлл - антиутопия, ставшая классикой</p>
+                </div>
+              </div>
+              <div class="slide">
+                <img src="https://via.placeholder.com/800x400/333333/FFFFFF?text=Гарри+Поттер" alt="Гарри Поттер">
+                <div class="slide-content">
+                  <h3>Гарри Поттер</h3>
+                  <p>Дж. К. Роулинг - вся серия в одном издании</p>
+                </div>
+              </div>
+              <div class="slide">
+                <img src="https://via.placeholder.com/800x400/333333/FFFFFF?text=Властелин+Колец" alt="Властелин Колец">
+                <div class="slide-content">
+                  <h3>Властелин Колец</h3>
+                  <p>Дж. Р. Р. Толкин - эпическая трилогия</p>
+                </div>
+              </div>
+              <div class="slide">
+                <img src="https://via.placeholder.com/800x400/333333/FFFFFF?text=Мастер+и+Маргарита" alt="Мастер и Маргарита">
+                <div class="slide-content">
+                  <h3>Мастер и Маргарита</h3>
+                  <p>Михаил Булгаков - мистический шедевр</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-controls">
+            <button class="slider-btn" id="prev-hits-slide"><i class="fas fa-chevron-left"></i></button>
+            <div class="slider-dots" id="hits-slider-dots"></div>
+            <button class="slider-btn" id="next-hits-slide"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </section>
+        
+        <section class="books">
+          <h2>Популярное</h2>
+          <div class="book-grid">
+            <div class="book-card">
+              <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=1984" alt="1984" />
+              <div class="content">
+                <h3>1984</h3>
+                <p>Джордж Оруэлл</p>
+                <span class="price">49.90 BYN</span>
+                <button class="buy-btn" data-book="1984" data-author="Джордж Оруэлл" data-price="49.90">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Алхимик" alt="Алхимик" />
+              <div class="content">
+                <h3>Алхимик</h3>
+                <p>Пауло Коэльо</p>
+                <span class="price">39.50 BYN</span>
+                <button class="buy-btn" data-book="Алхимик" data-author="Пауло Коэльо" data-price="39.50">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Атлант+расправил+плечи" alt="Атлант расправил плечи" />
+              <div class="content">
+                <h3>Атлант расправил плечи</h3>
+                <p>Айн Рэнд</p>
+                <span class="price">129.90 BYN</span>
+                <button class="buy-btn" data-book="Атлант расправил плечи" data-author="Айн Рэнд" data-price="129.90">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Братья+Карамазовы" alt="Братья Карамазовы" />
+              <div class="content">
+                <h3>Братья Карамазовы</h3>
+                <p>Ф. М. Достоевский</p>
+                <span class="price">69.90 BYN</span>
+                <button class="buy-btn" data-book="Братья Карамазовы" data-author="Ф. М. Достоевский" data-price="69.90">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Властелин+Колец" alt="Властелин Колец" />
+              <div class="content">
+                <h3>Властелин Колец</h3>
+                <p>Дж. Р. Р. Толкин</p>
+                <span class="price">89.90 BYN</span>
+                <button class="buy-btn" data-book="Властелин Колец" data-author="Дж. Р. Р. Толкин" data-price="89.90">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Гарри+Поттер" alt="Гарри Поттер" />
+              <div class="content">
+                <h3>Гарри Поттер</h3>
+                <p>Дж. К. Роулинг</p>
+                <span class="price">59.90 BYN</span>
+                <button class="buy-btn" data-book="Гарри Поттер" data-author="Дж. К. Роулинг" data-price="59.90">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Игра+престолов" alt="Игра престолов" />
+              <div class="content">
+                <h3>Игра престолов</h3>
+                <p>Джордж Р. Р. Мартин</p>
+                <span class="price">99.90 BYN</span>
+                <button class="buy-btn" data-book="Игра престолов" data-author="Джордж Р. Р. Мартин" data-price="99.90">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Мастер+и+Маргарита" alt="Мастер и Маргарита" />
+              <div class="content">
+                <h3>Мастер и Маргарита</h3>
+                <p>Михаил Булгаков</p>
+                <span class="price">45.00 BYN</span>
+                <button class="buy-btn" data-book="Мастер и Маргарита" data-author="Михаил Булгаков" data-price="45.00">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Метро+2033" alt="Метро 2033" />
+              <div class="content">
+                <h3>Метро 2033</h3>
+                <p>Дмитрий Глуховский</p>
+                <span class="price">42.50 BYN</span>
+                <button class="buy-btn" data-book="Метро 2033" data-author="Дмитрий Глуховский" data-price="42.50">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Преступление+и+наказание" alt="Преступление и наказание" />
+              <div class="content">
+                <h3>Преступление и наказание</h3>
+                <p>Ф. М. Достоевский</p>
+                <span class="price">35.50 BYN</span>
+                <button class="buy-btn" data-book="Преступление и наказание" data-author="Ф. М. Достоевский" data-price="35.50">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Солярис" alt="Солярис" />
+              <div class="content">
+                <h3>Солярис</h3>
+                <p>Станислав Лем</p>
+                <span class="price">79.90 BYN</span>
+                <button class="buy-btn" data-book="Солярис" data-author="Станислав Лем" data-price="79.90">Купить</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Корзина -->
+      <section id="cart" class="page">
+        <h2 class="page-title">Корзина</h2>
+        <div class="cart-items" id="cart-items">
+          <div class="empty-cart" id="empty-cart">
+            <p>Ваша корзина пуста</p>
+          </div>
+        </div>
+        <div class="cart-summary">
+          <div class="cart-total">
+            Итого: <span id="cart-total">0.00 BYN</span>
+          </div>
+          <button class="checkout-btn">Оформить заказ</button>
+        </div>
+      </section>
+
+      <!-- Контакты -->
+      <section id="contacts" class="page">
+        <h2 class="page-title">Контакты</h2>
+        <div class="contact-info">
+          <div class="contact-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Адрес</h3>
+            <p>г. Минск, ул. Книжная, 15</p>
+            <p>Пн-Пт: 9:00-21:00</p>
+            <p>Сб-Вс: 10:00-20:00</p>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-phone"></i>
+            <h3>Телефон</h3>
+            <p>+375 (17) 123-45-67</p>
+            <p>+375 (29) 765-43-21</p>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-envelope"></i>
+            <h3>Email</h3>
+            <p>info@knizhny-mir.by</p>
+            <p>support@knizhny-mir.by</p>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>Форма обратной связи</h3>
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="name">Имя:</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Сообщение:</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Отправить</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Скидки -->
+      <section id="discounts" class="page">
+        <h2 class="page-title">Скидки</h2>
+        <div class="discount-grid">
+          <div class="discount-card">
+            <div class="discount-badge">-20%</div>
+            <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=1984" alt="1984 со скидкой" />
+            <div class="content">
+              <h3>1984</h3>
+              <p>Джордж Оруэлл</p>
+              <span class="price"><s>49.90 BYN</s> 39.92 BYN</span>
+              <button class="buy-btn" data-book="1984" data-author="Джордж Оруэлл" data-price="39.92">Купить</button>
+            </div>
+          </div>
+          <div class="discount-card">
+            <div class="discount-badge">-15%</div>
+            <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Алхимик" alt="Алхимик со скидкой" />
+            <div class="content">
+              <h3>Алхимик</h3>
+              <p>Пауло Коэльо</p>
+              <span class="price"><s>39.50 BYN</s> 33.58 BYN</span>
+              <button class="buy-btn" data-book="Алхимик" data-author="Пауло Коэльо" data-price="33.58">Купить</button>
+            </div>
+          </div>
+          <div class="discount-card">
+            <div class="discount-badge">-25%</div>
+            <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Мастер+и+Маргарита" alt="Мастер и Маргарита со скидкой" />
+            <div class="content">
+              <h3>Мастер и Маргарита</h3>
+              <p>Михаил Булгаков</p>
+              <span class="price"><s>45.00 BYN</s> 33.75 BYN</span>
+              <button class="buy-btn" data-book="Мастер и Маргарита" data-author="Михаил Булгаков" data-price="33.75">Купить</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Друзья -->
+      <section id="friends" class="page">
+        <h2 class="page-title">Наши друзья</h2>
+        <div class="friends-grid">
+          <div class="friend-card">
+            <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Роберт+Дауни+мл." alt="Роберт Дауни мл.">
+            <h3>Роберт Дауни мл.</h3>
+            <p>Актер и коллекционер редких изданий</p>
+          </div>
+          <div class="friend-card">
+            <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Эмма+Уотсон" alt="Эмма Уотсон">
+            <h3>Эмма Уотсон</h3>
+            <p>Актриса и активистка, основательница книжного клуба</p>
+          </div>
+          <div class="friend-card">
+            <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Крис+Эванс" alt="Крис Эванс">
+            <h3>Крис Эванс</h3>
+            <p>Актер и поклонник научной фантастики</p>
+          </div>
+          <div class="friend-card">
+            <img src="https://via.placeholder.com/300x400/333333/FFFFFF?text=Скарлетт+Йоханссон" alt="Скарлетт Йоханссон">
+            <h3>Скарлетт Йоханссон</h3>
+            <p>Актриса и любительница детективов</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Авторизация/Регистрация -->
+      <section id="auth" class="page">
+        <h2 class="page-title">Вход и регистрация</h2>
+        <div class="auth-section">
+          <div class="auth-container">
+            <div class="auth-tabs">
+              <div class="auth-tab active" data-tab="login">Вход</div>
+              <div class="auth-tab" data-tab="register">Регистрация</div>
+            </div>
+            
+            <form id="login-form" class="auth-form active">
+              <div class="form-group">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="login-password">Пароль:</label>
+                <input type="password" id="login-password" name="password" required>
+              </div>
+              <button type="submit" class="submit-btn">Войти</button>
+            </form>
+            
+            <form id="register-form" class="auth-form">
+              <div class="form-group">
+                <label for="register-name">Имя:</label>
+                <input type="text" id="register-name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="register-email">Email:</label>
+                <input type="email" id="register-email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="register-phone">Телефон:</label>
+                <input type="tel" id="register-phone" name="phone" required>
+              </div>
+              <div class="form-group">
+                <label for="register-password">Пароль:</label>
+                <input type="password" id="register-password" name="password" required>
+              </div>
+              <div class="form-group">
+                <label for="register-confirm-password">Подтвердите пароль:</label>
+                <input type="password" id="register-confirm-password" name="confirm-password" required>
+              </div>
+              <button type="submit" class="submit-btn">Зарегистрироваться</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 Книжный Мир. Все права защищены.</p>
+    </footer>
+
+    <nav class="mobile-nav">
+      <a href="#" data-page="home"><i class="fas fa-home"></i></a>
+      <a href="#" data-page="discounts"><i class="fas fa-tag"></i></a>
+      <a href="#" data-page="friends"><i class="fas fa-users"></i></a>
+      <a href="#" data-page="contacts"><i class="fas fa-phone"></i></a>
+      <a href="#" data-page="auth"><i class="fas fa-user"></i></a>
+      <a href="#" data-page="cart"><i class="fas fa-shopping-cart"></i></a>
+    </nav>
+  </div>
+
+  <script>
+    // Навигация между страницами
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const pageId = this.getAttribute('data-page');
+        
+        // Скрыть все страницы
+        document.querySelectorAll('.page').forEach(page => {
+          page.classList.remove('active');
+        });
+        
+        // Показать выбранную страницу
+        document.getElementById(pageId).classList.add('active');
+        
+        // Обновить активную ссылку в навигации
+        document.querySelectorAll('nav a').forEach(navLink => {
+          navLink.classList.remove('nav-active');
+        });
+        this.classList.add('nav-active');
+      });
+    });
+
+    // Корзина
+    let cart = [];
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalElement = document.getElementById('cart-total');
+    const cartCountElement = document.getElementById('cart-count');
+    const emptyCartElement = document.getElementById('empty-cart');
+
+    // Функция обновления корзины
+    function updateCart() {
+      // Очистить контейнер
+      cartItemsContainer.innerHTML = '';
+      
+      if (cart.length === 0) {
+        cartItemsContainer.appendChild(emptyCartElement);
+        emptyCartElement.style.display = 'block';
+      } else {
+        emptyCartElement.style.display = 'none';
+        
+        // Добавить товары в корзину
+        cart.forEach((item, index) => {
+          const cartItem = document.createElement('div');
+          cartItem.className = 'cart-item';
+          cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.title}">
+            <div class="cart-item-details">
+              <h3>${item.title}</h3>
+              <p>${item.author}</p>
+              <span class="price">${item.price} BYN</span>
+            </div>
+            <div class="cart-item-actions">
+              <button class="quantity-btn" data-index="${index}" data-action="decrease">-</button>
+              <span class="quantity">${item.quantity}</span>
+              <button class="quantity-btn" data-index="${index}" data-action="increase">+</button>
+              <button class="remove-btn" data-index="${index}">Удалить</button>
+            </div>
+          `;
+          cartItemsContainer.appendChild(cartItem);
+        });
+      }
+      
+      // Обновить общую сумму
+      const total = cart.reduce((sum, item) => sum + (parseFloat(item.price) * item.quantity), 0);
+      cartTotalElement.textContent = `${total.toFixed(2)} BYN`;
+      
+      // Обновить счетчик товаров
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCountElement.textContent = totalItems;
+    }
+
+    // Добавление товара в корзину
+    document.querySelectorAll('.buy-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const bookTitle = this.getAttribute('data-book');
+        const bookAuthor = this.getAttribute('data-author');
+        const bookPrice = this.getAttribute('data-price');
+        const bookImage = this.closest('.book-card').querySelector('img').src;
+        
+        // Проверить, есть ли книга уже в корзине
+        const existingItemIndex = cart.findIndex(item => item.title === bookTitle);
+        
+        if (existingItemIndex !== -1) {
+          // Увеличить количество
+          cart[existingItemIndex].quantity += 1;
+        } else {
+          // Добавить новый товар
+          cart.push({
+            title: bookTitle,
+            author: bookAuthor,
+            price: bookPrice,
+            image: bookImage,
+            quantity: 1
+          });
+        }
+        
+        updateCart();
+        
+        // Показать уведомление
+        alert(`Книга "${bookTitle}" добавлена в корзину!`);
+      });
+    });
+
+    // Обработчики событий для корзины
+    document.addEventListener('click', function(e) {
+      // Увеличение/уменьшение количества
+      if (e.target.classList.contains('quantity-btn')) {
+        const index = parseInt(e.target.getAttribute('data-index'));
+        const action = e.target.getAttribute('data-action');
+        
+        if (action === 'increase') {
+          cart[index].quantity += 1;
+        } else if (action === 'decrease' && cart[index].quantity > 1) {
+          cart[index].quantity -= 1;
+        }
+        
+        updateCart();
+      }
+      
+      // Удаление товара
+      if (e.target.classList.contains('remove-btn')) {
+        const index = parseInt(e.target.getAttribute('data-index'));
+        cart.splice(index, 1);
+        updateCart();
+      }
+    });
+
+    // Форма обратной связи
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+      this.reset();
+    });
+
+    // Поиск
+    const searchInput = document.querySelector('.search-box input');
+    const searchButton = document.querySelector('.search-box button');
+
+    searchButton.addEventListener('click', function() {
+      performSearch();
+    });
+
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
+
+    function performSearch() {
+      const query = searchInput.value.toLowerCase();
+      if (query.trim() === '') return;
+      
+      // Здесь можно реализовать поиск по каталогу
+      alert(`Поиск: ${query}`);
+      // В реальном приложении здесь будет запрос к серверу или фильтрация товаров
+    }
+
+    // Слайдер "Хиты недели"
+    const hitsSlider = document.getElementById('hits-slider');
+    const hitsSlides = document.querySelectorAll('#hits-slider .slide');
+    const prevHitsBtn = document.getElementById('prev-hits-slide');
+    const nextHitsBtn = document.getElementById('next-hits-slide');
+    const hitsDotsContainer = document.getElementById('hits-slider-dots');
+
+    let currentHitsSlide = 0;
+    const totalHitsSlides = hitsSlides.length;
+
+    // Создание точек для навигации
+    hitsSlides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.classList.add('slider-dot');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToHitsSlide(index));
+      hitsDotsContainer.appendChild(dot);
+    });
+
+    // Функция перехода к конкретному слайду
+    function goToHitsSlide(slideIndex) {
+      currentHitsSlide = slideIndex;
+      hitsSlider.style.transform = `translateX(-${currentHitsSlide * 100}%)`;
+      
+      // Обновление активной точки
+      document.querySelectorAll('#hits-slider-dots .slider-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentHitsSlide);
+      });
+    }
+
+    // Следующий слайд
+    function nextHitsSlide() {
+      currentHitsSlide = (currentHitsSlide + 1) % totalHitsSlides;
+      goToHitsSlide(currentHitsSlide);
+    }
+
+    // Предыдущий слайд
+    function prevHitsSlide() {
+      currentHitsSlide = (currentHitsSlide - 1 + totalHitsSlides) % totalHitsSlides;
+      goToHitsSlide(currentHitsSlide);
+    }
+
+    // Обработчики событий для кнопок
+    prevHitsBtn.addEventListener('click', prevHitsSlide);
+    nextHitsBtn.addEventListener('click', nextHitsSlide);
+
+    // Автоматическое перелистывание
+    let hitsSlideInterval = setInterval(nextHitsSlide, 4000);
+
+    // Остановка автоматического перелистывания при наведении
+    hitsSlider.addEventListener('mouseenter', () => {
+      clearInterval(hitsSlideInterval);
+    });
+
+    // Возобновление автоматического перелистывания при уходе курсора
+    hitsSlider.addEventListener('mouseleave', () => {
+      hitsSlideInterval = setInterval(nextHitsSlide, 4000);
+    });
+
+    // Авторизация/Регистрация
+    const authTabs = document.querySelectorAll('.auth-tab');
+    const authForms = document.querySelectorAll('.auth-form');
+
+    authTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const tabId = this.getAttribute('data-tab');
+        
+        // Обновить активную вкладку
+        authTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Показать соответствующую форму
+        authForms.forEach(form => {
+          form.classList.remove('active');
+          if (form.id === `${tabId}-form`) {
+            form.classList.add('active');
+          }
+        });
+      });
+    });
+
+    // Обработка формы входа
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      alert(`Добро пожаловать, ${email}!`);
+      this.reset();
+    });
+
+    // Обработка формы регистрации
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('register-name').value;
+      const password = document.getElementById('register-password').value;
+      const confirmPassword = document.getElementById('register-confirm-password').value;
+      
+      if (password !== confirmPassword) {
+        alert('Пароли не совпадают!');
+        return;
+      }
+      
+      alert(`Регистрация успешна! Добро пожаловать, ${name}!`);
+      this.reset();
+      
+      // Переключиться на вкладку входа
+      authTabs.forEach(t => t.classList.remove('active'));
+      document.querySelector('.auth-tab[data-tab="login"]').classList.add('active');
+      
+      authForms.forEach(form => form.classList.remove('active'));
+      document.getElementById('login-form').classList.add('active');
+    });
+
+    // Инициализация корзины
+    updateCart();
+  </script>
+</body>
+</html>
