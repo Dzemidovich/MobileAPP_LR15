@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Книжный Мир | Беларусь</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>📚 Книжный Мир</h1>
+      <div class="search-box">
+        <input type="text" placeholder="Поиск по каталогу..." />
+        <button><i class="fas fa-search"></i></button>
+      </div>
+      <nav class="desktop-nav">
+        <a href="#" data-page="home" class="nav-active"><i class="fas fa-home"></i> Главная</a>
+        <a href="#" data-page="discounts"><i class="fas fa-tag"></i> Скидки</a>
+        <a href="#" data-page="friends"><i class="fas fa-users"></i> Друзья</a>
+        <a href="#" data-page="contacts"><i class="fas fa-phone"></i> Контакты</a>
+        <a href="#" data-page="auth"><i class="fas fa-user"></i> Войти</a>
+        <a href="#" data-page="cart"><i class="fas fa-shopping-cart"></i> Корзина (<span id="cart-count">0</span>)</a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <!-- Главная страница -->
+      <section id="home" class="page active">
+        <section class="hero">
+          <h2>Откройте мир книг</h2>
+          <p>Лучшие книги по выгодным ценам в Беларуси</p>
+          <button class="cta-btn">Каталог</button>
+        </section>
+        
+        <!-- Слайдер "Хиты недели" -->
+        <section class="slider-section">
+          <h2 class="page-title">Хиты недели</h2>
+          <div class="slider-container">
+            <div class="slider" id="hits-slider">
+              <div class="slide">
+                <img src="images/1984.jfif" alt="1984">
+                <div class="slide-content">
+                  <h3>1984</h3>
+                  <p>Джордж Оруэлл - антиутопия, ставшая классикой</p>
+                </div>
+              </div>
+              <div class="slide">
+                <img src="images/ГарриПоттер.jfif" alt="Гарри Поттер">
+                <div class="slide-content">
+                  <h3>Гарри Поттер</h3>
+                  <p>Дж. К. Роулинг - вся серия в одном издании</p>
+                </div>
+              </div>
+              <div class="slide">
+                <img src="images/ВластелинКолец.jpg" alt="Властелин Колец">
+                <div class="slide-content">
+                  <h3>Властелин Колец</h3>
+                  <p>Дж. Р. Р. Толкин - эпическая трилогия</p>
+                </div>
+              </div>
+              <div class="slide">
+                <img src="images/МастерМаргарита.jfif" alt="Мастер и Маргарита">
+                <div class="slide-content">
+                  <h3>Мастер и Маргарита</h3>
+                  <p>Михаил Булгаков - мистический шедевр</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-controls">
+            <button class="slider-btn" id="prev-hits-slide"><i class="fas fa-chevron-left"></i></button>
+            <div class="slider-dots" id="hits-slider-dots"></div>
+            <button class="slider-btn" id="next-hits-slide"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </section>
+        
+        <section class="books">
+          <h2>Популярное</h2>
+          <div class="book-grid">
+            <div class="book-card">
+              <img src="images/1984.jfif" alt="1984" />
+              <div class="content">
+                <h3>1984</h3>
+                <p>Джордж Оруэлл</p>
+                <span class="price">49.90 BYN</span>
+                <button class="buy-btn" data-book="1984" data-author="Джордж Оруэлл" data-price="49.90">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="images/Алхимик.jfif" alt="Алхимик" />
+              <div class="content">
+                <h3>Алхимик</h3>
+                <p>Пауло Коэльо</p>
+                <span class="price">39.50 BYN</span>
+                <button class="buy-btn" data-book="Алхимик" data-author="Пауло Коэльо" data-price="39.50">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="images/Атлант.jfif" alt="Атлант расправил плечи" />
+              <div class="content">
+                <h3>Атлант расправил плечи</h3>
+                <p>Айн Рэнд</p>
+                <span class="price">129.90 BYN</span>
+                <button class="buy-btn" data-book="Атлант расправил плечи" data-author="Айн Рэнд" data-price="129.90">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="images/Братья.jfif" alt="Братья Карамазовы" />
+              <div class="content">
+                <h3>Братья Карамазовы</h3>
+                <p>Ф. М. Достоевский</p>
+                <span class="price">69.90 BYN</span>
+                <button class="buy-btn" data-book="Братья Карамазовы" data-author="Ф. М. Достоевский" data-price="69.90">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="images/ВластелинКолец.jpg" alt="Властелин Колец" />
+              <div class="content">
+                <h3>Властелин Колец</h3>
+                <p>Дж. Р. Р. Толкин</p>
+                <span class="price">89.90 BYN</span>
+                <button class="buy-btn" data-book="Властелин Колец" data-author="Дж. Р. Р. Толкин" data-price="89.90">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="images/ГарриПоттер.jfif" alt="Гарри Поттер" />
+              <div class="content">
+                <h3>Гарри Поттер</h3>
+                <p>Дж. К. Роулинг</p>
+                <span class="price">59.90 BYN</span>
+                <button class="buy-btn" data-book="Гарри Поттер" data-author="Дж. К. Роулинг" data-price="59.90">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="images/ИграПрестолов.jfif" alt="Игра престолов" />
+              <div class="content">
+                <h3>Игра престолов</h3>
+                <p>Джордж Р. Р. Мартин</p>
+                <span class="price">99.90 BYN</span>
+                <button class="buy-btn" data-book="Игра престолов" data-author="Джордж Р. Р. Мартин" data-price="99.90">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="images/МастерМаргарита.jfif" alt="Мастер и Маргарита" />
+              <div class="content">
+                <h3>Мастер и Маргарита</h3>
+                <p>Михаил Булгаков</p>
+                <span class="price">45.00 BYN</span>
+                <button class="buy-btn" data-book="Мастер и Маргарита" data-author="Михаил Булгаков" data-price="45.00">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="images/Метро2033.jfif" alt="Метро 2033" />
+              <div class="content">
+                <h3>Метро 2033</h3>
+                <p>Дмитрий Глуховский</p>
+                <span class="price">42.50 BYN</span>
+                <button class="buy-btn" data-book="Метро 2033" data-author="Дмитрий Глуховский" data-price="42.50">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="images/Преступление.jpg.jfif" alt="Преступление и наказание" />
+              <div class="content">
+                <h3>Преступление и наказание</h3>
+                <p>Ф. М. Достоевский</p>
+                <span class="price">35.50 BYN</span>
+                <button class="buy-btn" data-book="Преступление и наказание" data-author="Ф. М. Достоевский" data-price="35.50">Купить</button>
+              </div>
+            </div>
+            <div class="book-card">
+              <img src="images/Солярис.jfif" alt="Солярис" />
+              <div class="content">
+                <h3>Солярис</h3>
+                <p>Станислав Лем</p>
+                <span class="price">79.90 BYN</span>
+                <button class="buy-btn" data-book="Солярис" data-author="Станислав Лем" data-price="79.90">Купить</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Корзина -->
+      <section id="cart" class="page">
+        <h2 class="page-title">Корзина</h2>
+        <div class="cart-items" id="cart-items">
+          <div class="empty-cart" id="empty-cart">
+            <p>Ваша корзина пуста</p>
+          </div>
+        </div>
+        <div class="cart-summary">
+          <div class="cart-total">
+            Итого: <span id="cart-total">0.00 BYN</span>
+          </div>
+          <button class="checkout-btn">Оформить заказ</button>
+        </div>
+      </section>
+
+      <!-- Контакты -->
+      <section id="contacts" class="page">
+        <h2 class="page-title">Контакты</h2>
+        <div class="contact-info">
+          <div class="contact-card">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Адрес</h3>
+            <p>г. Минск, ул. Книжная, 15</p>
+            <p>Пн-Пт: 9:00-21:00</p>
+            <p>Сб-Вс: 10:00-20:00</p>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-phone"></i>
+            <h3>Телефон</h3>
+            <p>+375 (17) 123-45-67</p>
+            <p>+375 (29) 765-43-21</p>
+          </div>
+          <div class="contact-card">
+            <i class="fas fa-envelope"></i>
+            <h3>Email</h3>
+            <p>info@knizhny-mir.by</p>
+            <p>support@knizhny-mir.by</p>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>Форма обратной связи</h3>
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="name">Имя:</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Сообщение:</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Отправить</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Скидки -->
+      <section id="discounts" class="page">
+        <h2 class="page-title">Скидки</h2>
+        <div class="discount-grid">
+          <div class="discount-card">
+            <div class="discount-badge">-20%</div>
+            <img src="images/1984.jfif" alt="1984 со скидкой" />
+            <div class="content">
+              <h3>1984</h3>
+              <p>Джордж Оруэлл</p>
+              <span class="price"><s>49.90 BYN</s> 39.92 BYN</span>
+              <button class="buy-btn" data-book="1984" data-author="Джордж Оруэлл" data-price="39.92">Купить</button>
+            </div>
+          </div>
+          <div class="discount-card">
+            <div class="discount-badge">-15%</div>
+            <img src="images/Алхимик.jfif" alt="Алхимик со скидкой" />
+            <div class="content">
+              <h3>Алхимик</h3>
+              <p>Пауло Коэльо</p>
+              <span class="price"><s>39.50 BYN</s> 33.58 BYN</span>
+              <button class="buy-btn" data-book="Алхимик" data-author="Пауло Коэльо" data-price="33.58">Купить</button>
+            </div>
+          </div>
+          <div class="discount-card">
+            <div class="discount-badge">-25%</div>
+            <img src="images/МастерМаргарита.jfif" alt="Мастер и Маргарита со скидкой" />
+            <div class="content">
+              <h3>Мастер и Маргарита</h3>
+              <p>Михаил Булгаков</p>
+              <span class="price"><s>45.00 BYN</s> 33.75 BYN</span>
+              <button class="buy-btn" data-book="Мастер и Маргарита" data-author="Михаил Булгаков" data-price="33.75">Купить</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Друзья -->
+      <section id="friends" class="page">
+        <h2 class="page-title">Наши друзья</h2>
+        <div class="friends-grid">
+          <div class="friend-card">
+            <img src="images/Томик.jfif" alt="Роберт Дауни мл.">
+            <h3>Роберт Дауни мл.</h3>
+            <p>Актер и коллекционер редких изданий</p>
+          </div>
+          <div class="friend-card">
+            <img src="images/Зендая.jfif" alt="Эмма Уотсон">
+            <h3>Эмма Уотсон</h3>
+            <p>Актриса и активистка, основательница книжного клуба</p>
+          </div>
+          <div class="friend-card">
+            <img src="images/ТомХарди.jpg" alt="Крис Эванс">
+            <h3>Крис Эванс</h3>
+            <p>Актер и поклонник научной фантастики</p>
+          </div>
+          <div class="friend-card">
+            <img src="images/Фелтон.jpg" alt="Скарлетт Йоханссон">
+            <h3>Скарлетт Йоханссон</h3>
+            <p>Актриса и любительница детективов</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Авторизация/Регистрация -->
+      <section id="auth" class="page">
+        <h2 class="page-title">Вход и регистрация</h2>
+        <div class="auth-section">
+          <div class="auth-container">
+            <div class="auth-tabs">
+              <div class="auth-tab active" data-tab="login">Вход</div>
+              <div class="auth-tab" data-tab="register">Регистрация</div>
+            </div>
+            
+            <form id="login-form" class="auth-form active">
+              <div class="form-group">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="login-password">Пароль:</label>
+                <input type="password" id="login-password" name="password" required>
+              </div>
+              <button type="submit" class="submit-btn">Войти</button>
+            </form>
+            
+            <form id="register-form" class="auth-form">
+              <div class="form-group">
+                <label for="register-name">Имя:</label>
+                <input type="text" id="register-name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="register-email">Email:</label>
+                <input type="email" id="register-email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="register-phone">Телефон:</label>
+                <input type="tel" id="register-phone" name="phone" required>
+              </div>
+              <div class="form-group">
+                <label for="register-password">Пароль:</label>
+                <input type="password" id="register-password" name="password" required>
+              </div>
+              <div class="form-group">
+                <label for="register-confirm-password">Подтвердите пароль:</label>
+                <input type="password" id="register-confirm-password" name="confirm-password" required>
+              </div>
+              <button type="submit" class="submit-btn">Зарегистрироваться</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 Книжный Мир. Все права защищены.</p>
+    </footer>
+
+    <nav class="mobile-nav">
+      <a href="#" data-page="home"><i class="fas fa-home"></i></a>
+      <a href="#" data-page="discounts"><i class="fas fa-tag"></i></a>
+      <a href="#" data-page="friends"><i class="fas fa-users"></i></a>
+      <a href="#" data-page="contacts"><i class="fas fa-phone"></i></a>
+      <a href="#" data-page="auth"><i class="fas fa-user"></i></a>
+      <a href="#" data-page="cart"><i class="fas fa-shopping-cart"></i></a>
+    </nav>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
